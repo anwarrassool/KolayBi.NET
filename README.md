@@ -1,18 +1,18 @@
-# Kolaybi Library For .Net 7
+# KolayBi Library For .Net 7
 
 Unofficial Kolaybi .Net client library
 
-Supports .Net 7.0
+Developed with .Net 7.0
 
 Kolaybi docs at https://developer.kolaybi.com/#overview
 
 # Requirements
-One of the runtime environment is required from below
-* .NET 8.0
+
+* .NET 7.0
 
 # Installation
 
-# kolayBi Usage
+# KolayBi Usage
 
 # Program.cs;
 
