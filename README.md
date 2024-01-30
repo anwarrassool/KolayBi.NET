@@ -1,12 +1,10 @@
 # Kolaybi Library For .Net 7
 
-Unofficial Kolaybi client library
-
-All methods have been rearranged to use async await.
+Unofficial Kolaybi .Net client library
 
 Supports .Net 7.0
 
-You can sign up for an iyzico account at https://iyzico.com
+Kolaybi docs at https://developer.kolaybi.com/#overview
 
 # Requirements
 One of the runtime environment is required from below
