@@ -60,6 +60,16 @@ public static class ServicesExtensions
 
 ```csharp 1
 
+public enum AppConfigSection
+{
+	KolayBiSetting
+}
+...
+
+```
+
+```csharp 1
+
 public static class AppConfiguration
 {
     public static T GetConfiguration<T>(IConfiguration configuration, AppConfigSection section)
