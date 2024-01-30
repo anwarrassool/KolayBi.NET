@@ -14,7 +14,7 @@ KolayBi docs at https://developer.kolaybi.com/#overview
 
 # KolayBi Usage
 
-# Program.cs;
+# Program.cs
 
 ```csharp 1
 
