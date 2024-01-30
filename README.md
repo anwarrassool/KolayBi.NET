@@ -277,6 +277,112 @@ public async Task<CreateProductResponse> CreateProduct(Product item)
 
 ```
 
+```csharp 1
+ using olayBi.NET.Models.CreateInvoiceResponse;
+
+public async Task<CreateInvoiceResponse> CreateInvoice(SomeParameters item)
+{
+    try
+    {
+	    var tokenResult = await this.GetToken();
+
+	    int KolayBiCustomerCode = 0;
+	    int KolayBiAdressCode = 0;
+	    int KolayBiProductId = 0;
+
+	    if (tokenResult.IsSuccess)
+	    {
+		_factory.access_token = tokenResult.Data.access_token;
+
+		switch ((ApiMode)Enum.Parse(typeof(ApiMode), _KolayBiSettings.mode.ToString()))
+		{
+		    case ApiMode.SandBox:
+			KolayBiCustomerCode = Convert.ToInt32(string.IsNullOrEmpty(item.SandboxKolayBiCustomerCode) ? "0" : item.SandboxKolayBiCustomerCode);
+			KolayBiAdressCode = Convert.ToInt32(string.IsNullOrEmpty(item.SandboxKolayBiAdressCode) ? "0" : item.SandboxKolayBiAdressCode);
+			KolayBiProductId = Convert.ToInt32(string.IsNullOrEmpty(item.SandBoxKolayBiProductId) ? "0" : item.SandBoxKolayBiProductId);
+
+			break;
+		    case ApiMode.Live:
+			KolayBiCustomerCode = Convert.ToInt32(string.IsNullOrEmpty(item.KolayBiCustomerCode) ? "0" : item.KolayBiCustomerCode);
+			KolayBiAdressCode = Convert.ToInt32(string.IsNullOrEmpty(KolayBiAdressCode) ? "0" : item.KolayBiAdressCode);
+			KolayBiProductId = Convert.ToInt32(string.IsNullOrEmpty(KolayBiProductId) ? "0" : item.KolayBiProductId);
+
+			break;
+		    default:
+			break;
+		}
+		
+
+		var createInvoiceRequest = new CreateInvoiceRequest()
+		{
+		    ContactId = KolayBiCustomerCode,
+		    AddressId = KolayBiAdressCode,
+		    Currency = item.CurrencyCode,
+		    DueDate = item.PaymentDate,
+		    ReceiverEmail = item.Email,
+		    SerialNo = item.OrderId,
+		    TrackingCurrency = item.CurrencyCode,
+		    Items = new Item[]
+		     {
+			new Item
+			{
+			    ProductId = KolayBiProductId,
+			    Quantity = 1.ToString(),
+			    UnitPrice =  Math.Round(Pitem.rice, 2, MidpointRounding.ToNegativeInfinity).ToString(),
+			    Description = item.Description,
+			    DiscountAmount = 0,
+			    VatRate = item.VatRate.ToString()
+			}
+		     },
+		    InternetSale = new InternetSale()
+		    {
+			PaymentDate = Pitem.aymentDate,
+			PaymentPlatform = item.PaymentProvider,
+			PaymentType = "credit-card",
+			Url = siteUrl
+		    },
+		    OrderDate = item.PaymentDate,
+		    Description = item.Description,
+		    DocumentType = "SATIS",
+		};
+
+		var paramters = JsonConvert.DeserializeObject<Dictionary<string, object>>(JsonConvert.SerializeObject(createInvoiceRequest)).FormDictionary();
+		var response = await _KolayBiApi.CreateInvoice(paramters);
+
+		if (response.Data != null)
+		{
+		    subscriptionpay.InvoiceNumber = response.Data.DocumentId.ToString();
+		   
+		    return response;
+
+		}
+		else
+		{
+		    return default
+		}
+	    }
+	    else
+	    {
+	       return default
+	    }
+    }
+    catch (Exception ex)
+    {
+	logger.LogError(UtilException.GetAllExceptionDetails(ex));
+
+	if (ex is RestEase.ApiException)
+	{
+		 return default
+
+	}
+	return default
+    }
+}
+
+...
+
+```
+
 # settings.json
 
 ```csharp 1
