@@ -168,14 +168,9 @@ namespace Api.Controllers
 
 ```
 
-Sample use Injection;
+Sample use;
 
 ```csharp 1
-
-using KolayBi.Net.Client;
-using KolayBi.Net.Extensions;
-using KolayBi.Net.Factory;
-using KolayBi.Net.Models;
 
 public async Task<TokenResponse> GetToken()
 {
@@ -202,10 +197,6 @@ public async Task<TokenResponse> GetToken()
 ```
 
 ```csharp 1
-using KolayBi.Net.Client;
-using KolayBi.Net.Extensions;
-using KolayBi.Net.Factory;
-using KolayBi.Net.Models;
 using KolayBi.Net.Models.CreateProductResponse;
 
 public async Task<CreateProductResponse> CreateProduct(Product item)
