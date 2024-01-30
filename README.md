@@ -219,8 +219,6 @@ public async Task<CreateProductResponse> CreateProduct(Product item)
 	    if (tokenResult.IsSuccess)
 	    {
 		_factory.access_token = tokenResult.Data.access_token;
-		//var dPrice = Convert.ToDouble(subscription.Amount) / Convert.ToDouble(Math.Round(Convert.ToDecimal(100 + subscription.TaxAmount.Value) / Convert.ToDecimal(100), 2, MidpointRounding.ToNegativeInfinity));
-		//Convert.ToDouble(subscription.Amount)/ Convert.ToDouble(((100 + subscription.TaxAmount.Value)/100)),
 
 		var createProductRequest = new KolayBi.Net.Models.CreateProductRequest.CreateProductRequest()
 		{
