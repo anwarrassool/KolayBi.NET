@@ -23,7 +23,7 @@ ServicesExtensions.AddKolayBiInvoicing(builder);
 
 ```
 
-# ServicesExtensions.cs;
+# ServicesExtensions.cs
 
 ```csharp 1
 	    
@@ -56,7 +56,7 @@ public static class ServicesExtensions
 
 ```
 
-# AppConfiguration.cs;
+# AppConfiguration.cs
 
 ```csharp 1
 
@@ -87,7 +87,7 @@ public static class AppConfiguration
 
 ```
 
-# Settings.cs;
+# Settings.cs
 
 ```csharp 1
 
@@ -138,7 +138,7 @@ public static class AppConfiguration
 
 ```
 
-Sample use Injection;
+Sample use Injection
 
 ```csharp 1
         
@@ -168,7 +168,7 @@ namespace Api.Controllers
 
 ```
 
-Sample use;
+Sample use
 
 ```csharp 1
 
@@ -197,6 +197,7 @@ public async Task<TokenResponse> GetToken()
 ```
 
 ```csharp 1
+
 using KolayBi.Net.Models.CreateProductResponse;
 
 public async Task<CreateProductResponse> CreateProduct(Product item)
