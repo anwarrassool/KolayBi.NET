@@ -14,7 +14,7 @@ One of the runtime environment is required from below
 
 # kolayBi Usage
 
-# Progran.cs;
+# Program.cs;
 
 ```csharp 1
 
@@ -258,6 +258,10 @@ public async Task<UnitofWorkOut<CreateProductResponse>> CreateProduct(Product it
 
 ```
 
+# settings.json
+
+```csharp 1
+
 Sample settings.json
 
   "KolayBiSetting": {
@@ -273,3 +277,7 @@ Sample settings.json
       "baseUrl": "https://ofis-api.kolaybi.com/kolaybi/v1"
     }
   }
+
+...
+
+```
