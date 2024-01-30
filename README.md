@@ -1,10 +1,10 @@
-# KolayBi Library For .Net 7
+# .Net Wrapper for KolayBi
 
 Unofficial Kolaybi .Net client library
 
 Developed with .Net 7.0
 
-Kolaybi docs at https://developer.kolaybi.com/#overview
+KolayNi docs at https://developer.kolaybi.com/#overview
 
 # Requirements
 
@@ -161,97 +161,101 @@ public Controller(IOptions<KolayBiSetting> KolayBiAISettings,IKolayBiApiFactory 
     else
         _KolayBiApi = _factory.client;
 }
+...
 
-public async Task<UnitofWorkOut<TokenResponse>> GetToken()
+```
+
+```csharp 1
+
+public async Task<TokenResponse> GetToken()
 {
     try
     {
         var response = await _KolayBiApi.GetAccessToken();
-        return new UnitofWorkOut<TokenResponse>(StatusEnum.Ok, response);
+        return response;
     }
     catch (Exception ex)
     {
         logger.LogError(UtilException.GetAllExceptionDetails(ex));
 
-        if (ex is RestEase.ApiException)
-        {
-            return new UnitofWorkOut<TokenResponse>(StatusEnum.InternalServerError, IsSuccess: false, message: ((RestEase.ApiException)ex).Content);
-        }
-        return new UnitofWorkOut<TokenResponse>(StatusEnum.InternalServerError, IsSuccess: false, message: UtilException.GetAllExceptionDetails(ex));
+	if (ex is RestEase.ApiException)
+	{
+	    return default;
+	}
+	return default;
 
     }
 }
 
+...
 
-public async Task<UnitofWorkOut<CreateProductResponse>> CreateProduct(Product item)
+```
+
+```csharp 1
+
+public async Task<CreateProductResponse> CreateProduct(Product item)
 {
     try
     {
-            var tokenResult = await this.GetToken();
+	    var tokenResult = await this.GetToken();
 
-            if (tokenResult.IsSuccess)
-            {
-                _factory.access_token = tokenResult.Data.access_token;
- 
-                var createProductRequest = new KolayBi.Net.Models.CreateProductRequest.CreateProductRequest()
-                {
-                    Barcode = item.Barcode,
-                    VatRate = item.VatRate,
-                    Description = item.Description,
-                    Name = item.Name,
-                    Price = Convert.ToDouble(item.Amount),
-                    Quantity = 1,
-                    ProductType = "service",
-                    PriceCurrency = item.CurrencyCode,
-                    Code = item.Code,
-                    DiscountType = "numeric",
-                    DiscountValue = 0,
-                    Tags = new List<string?>(),
-                    
-                };
+	    if (tokenResult.IsSuccess)
+	    {
+		_factory.access_token = tokenResult.Data.access_token;
+		//var dPrice = Convert.ToDouble(subscription.Amount) / Convert.ToDouble(Math.Round(Convert.ToDecimal(100 + subscription.TaxAmount.Value) / Convert.ToDecimal(100), 2, MidpointRounding.ToNegativeInfinity));
+		//Convert.ToDouble(subscription.Amount)/ Convert.ToDouble(((100 + subscription.TaxAmount.Value)/100)),
 
-                var paramters = JsonConvert.DeserializeObject<Dictionary<string, object>>(JsonConvert.SerializeObject(createProductRequest));
+		var createProductRequest = new KolayBi.Net.Models.CreateProductRequest.CreateProductRequest()
+		{
+		    Barcode = item.Barcode,
+		    VatRate = item.VatRate,
+		    Description = item.Description,
+		    Name = item.Name,
+		    Price = Convert.ToDouble(item.Amount),
+		    Quantity = 1,
+		    ProductType = "service",
+		    PriceCurrency = item.CurrencyCode,
+		    Code = item.PayPalPlanId,
+		    DiscountType = "numeric",
+		    DiscountValue = 0,
+		    Tags = new List<string?>(),
 
-                var response = await _KolayBiApi.CreateProduct(paramters);
+		};
 
-                if (response.Data != null)
-                {
-                    switch ((ApiMode)Enum.Parse(typeof(ApiMode), _KolayBiSettings.mode.ToString()))
-                    {
-                        case ApiMode.SandBox:
-                            subscription.SandBoxKolayBiProductId = response.Data.Id.ToString();
-                            break;
-                        case ApiMode.Live:
-                            subscription.KolayBiProductId = response.Data.Id.ToString();
-                            break;
-                        default:
-                            break;
-                    }
-                    //item.KolayBiProductId = response.Data.Id.ToString();
+		var paramters = JsonConvert.DeserializeObject<Dictionary<string, object>>(JsonConvert.SerializeObject(createProductRequest));
 
-                    return new UnitofWorkOut<CreateProductResponse>(StatusEnum.Ok, response);
+		var response = await _KolayBiApi.CreateProduct(paramters);
 
-                }
-                else
-                {
-                    return new UnitofWorkOut<CreateProductResponse>(StatusEnum.BadRequest, IsSuccess: false, message: response.Message.ToString());
-
-                }
-            }
-            else
-            {
-                return new UnitofWorkOut<CreateProductResponse>(StatusEnum.LoginInvalid, IsSuccess: false, message: StatusEnum.LoginInvalid.ToString());
-            }
+		if (response.Data != null)
+		{
+		    switch ((ApiMode)Enum.Parse(typeof(ApiMode), _KolayBiSettings.mode.ToString()))
+		    {
+			case ApiMode.SandBox:
+			    item.SandBoxKolayBiProductId = response.Data.Id.ToString();
+			    break;
+			case ApiMode.Live:
+			    item.KolayBiProductId = response.Data.Id.ToString();
+			    break;
+			default:
+			    break;
+		    }
+		}
+		return response;
+	    }
+	    else
+	    {
+		return default;
+	    }
     }
     catch (Exception ex)
     {
-        logger.LogError(UtilException.GetAllExceptionDetails(ex));
+	logger.LogError(UtilException.GetAllExceptionDetails(ex));
 
-        if (ex is RestEase.ApiException)
-        {
-            return new UnitofWorkOut<CreateProductResponse>(StatusEnum.InternalServerError, IsSuccess: false, message: ((RestEase.ApiException)ex).Content);
-        }
-        return new UnitofWorkOut<CreateProductResponse>(StatusEnum.InternalServerError, IsSuccess: false, message: UtilException.GetAllExceptionDetails(ex));
+	if (ex is RestEase.ApiException)
+	{
+	    return default;
+	}
+	return default;
     }
 }
 ...
