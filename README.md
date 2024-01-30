@@ -138,7 +138,7 @@ public static class AppConfiguration
 
 ```
 
-Sample use;
+Sample use Injection;
 
 ```csharp 1
         
@@ -147,25 +147,35 @@ using KolayBi.Net.Extensions;
 using KolayBi.Net.Factory;
 using KolayBi.Net.Models;
 
-private IKolayBiApi _KolayBiApi;
-private readonly IKolayBiApiFactory _factory;
-public KolayBiSetting _KolayBiSettings { get; }
-
-public Controller(IOptions<KolayBiSetting> KolayBiAISettings,IKolayBiApiFactory factory)
+namespace Api.Controllers
 {
-    _KolayBiSettings = KolayBiAISettings.Value;
-    _factory = factory;
+	private IKolayBiApi _KolayBiApi;
+	private readonly IKolayBiApiFactory _factory;
+	public KolayBiSetting _KolayBiSettings { get; }
 
-    if (_factory.client == null)
-        _KolayBiApi = _factory.GetApiClient(((ApiMode)Enum.Parse(typeof(ApiMode), _KolayBiSettings.mode.ToString())));
-    else
-        _KolayBiApi = _factory.client;
+	public Controller(IOptions<KolayBiSetting> KolayBiAISettings,IKolayBiApiFactory factory)
+	{
+	    _KolayBiSettings = KolayBiAISettings.Value;
+	    _factory = factory;
+	
+	    if (_factory.client == null)
+		_KolayBiApi = _factory.GetApiClient(((ApiMode)Enum.Parse(typeof(ApiMode), _KolayBiSettings.mode.ToString())));
+	    else
+		_KolayBiApi = _factory.client;
+	}
 }
 ...
 
 ```
 
+Sample use Injection;
+
 ```csharp 1
+
+using KolayBi.Net.Client;
+using KolayBi.Net.Extensions;
+using KolayBi.Net.Factory;
+using KolayBi.Net.Models;
 
 public async Task<TokenResponse> GetToken()
 {
@@ -192,6 +202,11 @@ public async Task<TokenResponse> GetToken()
 ```
 
 ```csharp 1
+using KolayBi.Net.Client;
+using KolayBi.Net.Extensions;
+using KolayBi.Net.Factory;
+using KolayBi.Net.Models;
+using KolayBi.Net.Models.CreateProductResponse;
 
 public async Task<CreateProductResponse> CreateProduct(Product item)
 {
