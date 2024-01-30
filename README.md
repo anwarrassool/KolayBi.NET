@@ -4,7 +4,7 @@ Unofficial Kolaybi .Net client library
 
 Developed with .Net 7.0
 
-KolayNi docs at https://developer.kolaybi.com/#overview
+KolayBi docs at https://developer.kolaybi.com/#overview
 
 # Requirements
 
