@@ -278,7 +278,8 @@ public async Task<CreateProductResponse> CreateProduct(Product item)
 ```
 
 ```csharp 1
- using olayBi.NET.Models.CreateInvoiceResponse;
+
+using olayBi.NET.Models.CreateInvoiceResponse;
 
 public async Task<CreateInvoiceResponse> CreateInvoice(SomeParameters item)
 {
@@ -304,8 +305,8 @@ public async Task<CreateInvoiceResponse> CreateInvoice(SomeParameters item)
 			break;
 		    case ApiMode.Live:
 			KolayBiCustomerCode = Convert.ToInt32(string.IsNullOrEmpty(item.KolayBiCustomerCode) ? "0" : item.KolayBiCustomerCode);
-			KolayBiAdressCode = Convert.ToInt32(string.IsNullOrEmpty(KolayBiAdressCode) ? "0" : item.KolayBiAdressCode);
-			KolayBiProductId = Convert.ToInt32(string.IsNullOrEmpty(KolayBiProductId) ? "0" : item.KolayBiProductId);
+			KolayBiAdressCode = Convert.ToInt32(string.IsNullOrEmpty(item.KolayBiAdressCode) ? "0" : item.KolayBiAdressCode);
+			KolayBiProductId = Convert.ToInt32(string.IsNullOrEmpty(item.KolayBiProductId) ? "0" : item.KolayBiProductId);
 
 			break;
 		    default:
