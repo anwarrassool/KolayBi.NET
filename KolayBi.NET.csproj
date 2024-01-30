@@ -1,0 +1,62 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Models\" />
+    <None Remove="Models\InputModels\" />
+    <None Remove="Models\InputModels\Associates\" />
+    <None Remove="Models\ResponseModels\" />
+    <None Remove="Models\ResponseModels\Associates\" />
+    <None Remove="Models\InputModels\Products\" />
+    <None Remove="Models\ResponseModels\Products\" />
+    <None Remove="Models\InputModels\Tags\" />
+    <None Remove="Models\ResponseModels\Tags\" />
+    <None Remove="Models\InputModels\Vaults\" />
+    <None Remove="Models\ResponseModels\Vaults\" />
+    <None Remove="Models\ResponseModels\Invoices\" />
+    <None Remove="Models\InputModels\Invoices\" />
+    <None Remove="Models\ResponseModels\Orders\" />
+    <None Remove="Models\InputModels\Orders\" />
+    <None Remove="Models\ResponseModels\Proformas\" />
+    <None Remove="Models\InputModels\Proformas\" />
+    <None Remove="Utils\" />
+    <None Remove="Utils\Abstract\" />
+    <None Remove="Utils\Concrete\" />
+    <None Remove="Filters\" />
+    <None Remove="Extensions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
+    <Folder Include="Models\InputModels\" />
+    <Folder Include="Models\InputModels\Associates\" />
+    <Folder Include="Models\ResponseModels\" />
+    <Folder Include="Models\ResponseModels\Associates\" />
+    <Folder Include="Models\InputModels\Products\" />
+    <Folder Include="Models\ResponseModels\Products\" />
+    <Folder Include="Models\InputModels\Tags\" />
+    <Folder Include="Models\ResponseModels\Tags\" />
+    <Folder Include="Models\InputModels\Vaults\" />
+    <Folder Include="Models\ResponseModels\Vaults\" />
+    <Folder Include="Models\ResponseModels\Invoices\" />
+    <Folder Include="Models\InputModels\Invoices\" />
+    <Folder Include="Models\ResponseModels\Orders\" />
+    <Folder Include="Models\InputModels\Orders\" />
+    <Folder Include="Models\ResponseModels\Proformas\" />
+    <Folder Include="Models\InputModels\Proformas\" />
+    <Folder Include="Utils\" />
+    <Folder Include="Utils\Abstract\" />
+    <Folder Include="Utils\Concrete\" />
+    <Folder Include="Filters\" />
+    <Folder Include="Extensions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="RestEase" Version="1.6.4" />
+    <PackageReference Include="Stef.Validation" Version="0.1.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+  </ItemGroup>
+</Project>
