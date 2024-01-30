@@ -329,7 +329,7 @@ public async Task<CreateInvoiceResponse> CreateInvoice(SomeParameters item)
 			{
 			    ProductId = KolayBiProductId,
 			    Quantity = 1.ToString(),
-			    UnitPrice =  Math.Round(Pitem.rice, 2, MidpointRounding.ToNegativeInfinity).ToString(),
+			    UnitPrice =  Math.Round(item.Price, 2, MidpointRounding.ToNegativeInfinity).ToString(),
 			    Description = item.Description,
 			    DiscountAmount = 0,
 			    VatRate = item.VatRate.ToString()
@@ -337,7 +337,7 @@ public async Task<CreateInvoiceResponse> CreateInvoice(SomeParameters item)
 		     },
 		    InternetSale = new InternetSale()
 		    {
-			PaymentDate = Pitem.aymentDate,
+			PaymentDate = item.PaymentDate,
 			PaymentPlatform = item.PaymentProvider,
 			PaymentType = "credit-card",
 			Url = siteUrl
@@ -352,10 +352,7 @@ public async Task<CreateInvoiceResponse> CreateInvoice(SomeParameters item)
 
 		if (response.Data != null)
 		{
-		    subscriptionpay.InvoiceNumber = response.Data.DocumentId.ToString();
-		   
 		    return response;
-
 		}
 		else
 		{
